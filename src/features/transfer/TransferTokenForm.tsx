@@ -64,11 +64,11 @@ export function TransferTokenForm() {
     >
       {({ isValidating }) => (
         <Form className="flex flex-col items-stretch w-full mt-2">
-          <ChainSelectSection isReview={isReview} />
-          <div className="mt-3 flex justify-between items-end space-x-4">
+          <ChainSelectSection2 isReview={isReview} />
+          {/* <div className="mt-3 flex justify-between items-end space-x-4">
             <TokenSection setIsNft={setIsNft} isReview={isReview} />
             <AmountSection isNft={isNft} isReview={isReview} />
-          </div>
+          </div> */}
           <RecipientSection isReview={isReview} />
           <ReviewDetails visible={isReview} />
           <ButtonSection
@@ -76,9 +76,61 @@ export function TransferTokenForm() {
             isValidating={isValidating}
             setIsReview={setIsReview}
           />
+          <a
+            href="https://github.com/hyperlane-xyz/hyperlane-warp-ui-template"
+            target="_blank"
+            className="flex items-center justify-center powered"
+          >
+            Powered by Hyperlane
+          </a>
         </Form>
       )}
     </Formik>
+  );
+}
+
+function ChainSelectSection2({ isReview }: { isReview: boolean }) {
+  const chains = useMemo(() => getWarpCore().getTokenChains(), []);
+  const { values } = useFormikContext<TransferFormValues>();
+  const { balance } = useOriginBalance(values);
+
+  const { values: values2 } = useFormikContext<TransferFormValues>();
+  const { balance: balance2 } = useDestinationBalance(values2);
+
+  return (
+    <div>
+      <div className="flex justify-between items-center form-input-container">
+        <TextField
+          name="amount"
+          placeholder="0.00"
+          classes="w-full clearn-input"
+          type="number"
+          step="any"
+          disabled={isReview}
+        />
+        <div className="flex flex-col flex-end">
+          <ChainSelectField name="origin" label="From" chains={chains} disabled={isReview} />
+          <TokenBalance label="My balance" balance={balance} />
+        </div>
+      </div>
+      <div className="flex items-center justify-center swap-container">
+        <SwapChainsButton disabled={isReview} />
+      </div>
+      <div className="flex justify-between items-center form-input-container">
+        <TextField
+          name="amount"
+          placeholder="0.00"
+          classes="w-full clearn-input"
+          type="number"
+          step="any"
+          disabled={isReview}
+        />
+        <div className="flex flex-col flex-end">
+          <ChainSelectField name="destination" label="From" chains={chains} disabled={isReview} />
+          <TokenBalance label="Remote balance" balance={balance2} />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -98,10 +150,10 @@ function SwapChainsButton({ disabled }: { disabled?: boolean }) {
   return (
     <IconButton
       imgSrc={SwapIcon}
-      width={22}
-      height={22}
+      width={120}
+      height={120}
       title="Swap chains"
-      classes={!disabled ? 'hover:rotate-180' : undefined}
+      classes="swap-btn"
       onClick={onClick}
       disabled={disabled}
     />
@@ -183,16 +235,16 @@ function RecipientSection({ isReview }: { isReview: boolean }) {
   return (
     <div className="mt-4">
       <div className="flex justify-between pr-1">
-        <label htmlFor="recipient" className="block uppercase text-sm text-gray-500 pl-0.5">
+        <label htmlFor="recipient" className="block text-sm text-gray-500 pl-0.5">
           Recipient Address
         </label>
-        <TokenBalance label="Remote balance" balance={balance} />
+        {/* <TokenBalance label="Remote balance" balance={balance} /> */}
       </div>
       <div className="relative w-full">
         <TextField
           name="recipient"
-          placeholder="0x123456..."
-          classes="w-full"
+          placeholder="Enter the recipient address"
+          classes="w-full input-component"
           disabled={isReview}
         />
         <SelfButton disabled={isReview} />
@@ -260,7 +312,7 @@ function ButtonSection({
       </SolidButton>
       <SolidButton
         type="button"
-        color="pink"
+        color="sky"
         onClick={triggerTransactionsHandler}
         classes="flex-1 px-3 py-1.5"
       >
@@ -323,7 +375,7 @@ function SelfButton({ disabled }: { disabled?: boolean }) {
       onClick={onClick}
       color="gray"
       disabled={disabled}
-      classes="text-xs absolute right-0.5 top-2 bottom-0.5 px-2"
+      classes="text-xs absolute right-0.5 top-2 bottom-0.5 px-2 self-btn"
     >
       SELF
     </SolidButton>
