@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+* {
+  font-family: 'Inter';
+}
+
 a {
   outline: none;
   color: inherit;
@@ -209,4 +213,186 @@ Fixes for cosmos chain selection modal
 */
 div[data-floating-ui-portal] > div {
   z-index: 10000;
+}
+
+.wallet-container {
+  border-radius: var(--Border-radius-radius-inf, 1000px);
+  border: var(--Space-layout-none, 1px) solid
+    var(--Color-border-border-secondary, rgba(6, 6, 7, 0.17));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%);
+}
+
+.input-component {
+  border-radius: 12px;
+  border: 1px solid var(--Color-border-border, rgba(6, 6, 7, 0.08));
+  background: var(--Color-fill-surface-surface, #fff);
+  height: 56px;
+  line-height: 56px;
+}
+
+.self-btn {
+  height: 24px;
+  border-radius: var(--Border-radius-button-sm, 8px);
+  border: 1px solid var(--Color-border-border-secondary, rgba(6, 6, 7, 0.17));
+  background: var(--Color-fill-bg-bg, #fff);
+  margin: 16px 8px;
+  color: var(--Color-text-text, #1f1f1f);
+
+  /* Product/Body/body-md/bold */
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 153.846% */
+}
+
+.form-input-container {
+  padding: 24px;
+  border-radius: var(--Border-radius-radius-md, 12px);
+  border: 1px solid var(--Color-border-border, rgba(6, 6, 7, 0.08));
+  background: var(--Color-fill-surface-surface, #fff);
+}
+
+.clearn-input {
+  border: none;
+  font-size: 30px;
+  margin-top: 0;
+}
+
+.chain-select {
+  border-radius: var(--Border-radius-radius-inf, 1000px);
+  background: var(--Color-fill-surface-surface-2, #f8f8f8);
+}
+
+.swap-btn {
+  position: absolute;
+}
+
+.swap-container {
+  margin: 4px 0;
+}
+
+.action-btn {
+}
+
+.sky-btn {
+  height: 56px;
+  border-radius: var(--Border-radius-button-default, 12px);
+  background: var(--bg-accent-light, linear-gradient(180deg, #eff3ff 0%, #dee6ff 100%));
+}
+
+.sky-btn-hover {
+  opacity: 0.8;
+}
+
+.sky-btn-active {
+  opacity: 0.6;
+}
+
+.powered {
+  overflow: hidden;
+  color: var(--Color-text-text-secondary, #656565);
+  text-align: center;
+  text-overflow: ellipsis;
+
+  /* Product/Body/body-sm/medium-underline */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  text-decoration-line: underline;
+  margin-top: 24px;
+}
+
+.transaction-title {
+  height: 60px;
+  padding: 10px 14px;
+  color: var(--Color-text-text, #1f1f1f);
+
+  /* Product/Heading/heading-md */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+}
+
+.send-label {
+  color: var(--Color-text-text, #1f1f1f);
+  text-align: center;
+
+  /* Product/Body/body-md/medium */
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+}
+
+.send-value {
+  color: var(--Color-text-text-accent, #0056d4);
+
+  /* Product/Heading/heading-md */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+}
+
+.send-split {
+  height: 1px;
+  background: var(--Color-border-border, rgba(6, 6, 7, 0.08));
+  margin: 24px 0;
+}
+
+.sent-final {
+  border-radius: var(--Border-radius-radius-inf, 1000px);
+  background: var(--Color-fill-surface-surface-success, #e1f6e8);
+  padding: 6px;
+  width: 85px;
+  color: var(--Color-text-text-success, #007132);
+  text-align: center;
+
+  /* Product/Body/body-md/medium */
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+}
+
+.sent-failed {
+  width: 85px;
+  border-radius: var(--Border-radius-radius-inf, 1000px);
+  background: rgba(255, 192, 203, 0.5);
+  padding: 6px;
+  color: var(--Color-text-text-success, #000);
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+}
+
+.sent-result {
+  margin-left: 8px;
+}
+
+.hash-address {
+  max-width: 87%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 0;
+}
+
+.transfer-property {
+  border-bottom: 1px solid rgba(6, 6, 7, 0.08);
+  padding-bottom: 8px;
 }

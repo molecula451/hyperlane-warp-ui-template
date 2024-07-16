@@ -7,11 +7,11 @@ import { MessageStatus, MessageTimeline, useMessageTimeline } from '@hyperlane-x
 import { Spinner } from '../../components/animation/Spinner';
 import { CopyButton } from '../../components/buttons/CopyButton';
 import { ChainLogo } from '../../components/icons/ChainLogo';
-import { TokenIcon } from '../../components/icons/TokenIcon';
-import { WideChevron } from '../../components/icons/WideChevron';
 import { Modal } from '../../components/layout/Modal';
 import { getMultiProvider, getWarpCore } from '../../context/context';
+import WideChevronIcon from '../../images/icons/WideChevron.svg';
 import LinkIcon from '../../images/icons/external-link-icon.svg';
+import SuccessIcon from '../../images/icons/success.svg';
 import { formatTimestamp } from '../../utils/date';
 import { getHypExplorerLink } from '../../utils/links';
 import { logger } from '../../utils/logger';
@@ -107,108 +107,133 @@ export function TransfersDetailsModal({
   const explorerLink = getHypExplorerLink(origin, msgId);
 
   return (
-    <Modal
-      showCloseBtn={false}
-      isOpen={isOpen}
-      close={onClose}
-      title=""
-      padding="p-4 md:p-5"
-      width="max-w-sm"
-    >
-      {isFinal && (
-        <div className="flex justify-between">
-          <h2 className="text-gray-600 font-medium">{date}</h2>
-          <div className="flex items-center font-medium">
-            {isSent ? (
-              <h3 className="text-blue-500">Sent</h3>
-            ) : (
-              <h3 className="text-red-500">Failed</h3>
-            )}
-            <Image
-              src={getIconByTransferStatus(status)}
-              width={25}
-              height={25}
-              alt=""
-              className="ml-2"
-            />
-          </div>
+    <Modal showCloseBtn={false} isOpen={isOpen} close={onClose} title="" width="max-w-sm">
+      {!isFinal ? (
+        <div className="transaction-title">Transaction</div>
+      ) : (
+        <div className="transaction-title">
+          {isSent ? 'Sent' : 'Failed'} | {date}
         </div>
       )}
+      <div style={{ padding: '0 16px' }}>
+        {/* {isFinal && (
+          <div className="flex justify-between">
+            <h2 className="text-gray-600 font-medium">{date}</h2>
+            <div className="flex items-center font-medium">
+              {isSent ? (
+                <h3 className="text-blue-500">Sent</h3>
+              ) : (
+                <h3 className="text-red-500">Failed</h3>
+              )}
+              <Image
+                src={getIconByTransferStatus(status)}
+                width={25}
+                height={25}
+                alt=""
+                className="ml-2"
+              />
+            </div>
+          </div>
+        )} */}
 
-      <div className="mt-4 p-3 flex items-center justify-center w-full rounded-full bg-blue-200">
+        {/* <div className="mt-4 p-3 flex items-center justify-center w-full rounded-full bg-blue-200">
         <TokenIcon token={token} size={30} />
         <div className="ml-2 flex items items-baseline">
           <span className="text-xl font-medium">{amount}</span>
           <span className="text-xl font-medium ml-1">{token?.symbol}</span>
         </div>
-      </div>
-
-      <div className="mt-4 flex items-center justify-around">
-        <div className="ml-2 flex flex-col items-center">
-          <ChainLogo chainName={origin} size={64} background={true} />
-          <span className="mt-1 font-medium tracking-wider">
-            {getChainDisplayName(origin, true)}
+      </div> */}
+        <div className="flex justify-between items-center mt-6 mb-6">
+          <span className="send-label">Sending Amount</span>
+          <span className="send-value">
+            {amount}&nbsp;{token?.symbol}
           </span>
         </div>
-        <div className="flex mb-6 sm:space-x-1.5">
-          <WideChevron />
-          <WideChevron />
-        </div>
-        <div className="mr-2 flex flex-col items-center">
-          <ChainLogo chainName={destination} size={64} background={true} />
-          <span className="mt-1 font-medium tracking-wider">
-            {getChainDisplayName(destination, true)}
-          </span>
-        </div>
-      </div>
+        <div className="send-split"></div>
 
-      {isFinal ? (
-        <div className="mt-5 flex flex-col space-y-4">
-          <TransferProperty name="Sender Address" value={sender} url={fromUrl} />
-          <TransferProperty name="Recipient Address" value={recipient} url={toUrl} />
-          {token?.addressOrDenom && (
-            <TransferProperty name="Token Address or Denom" value={token.addressOrDenom} />
-          )}
-          {originTxHash && (
-            <TransferProperty
-              name="Origin Transaction Hash"
-              value={originTxHash}
-              url={originTxUrl}
-            />
-          )}
-          {msgId && <TransferProperty name="Message ID" value={msgId} />}
-          {explorerLink && (
-            <div className="flex justify-between">
-              <span className="text-gray-350 text-xs leading-normal tracking-wider">
-                <a
-                  className="text-gray-350 text-xs leading-normal tracking-wider underline underline-offset-2 hover:opacity-80 active:opacity-70"
-                  href={explorerLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View message in Hyperlane Explorer
-                </a>
-              </span>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="py-4 flex flex-col justify-center items-center">
-          <Spinner />
-          <div
-            className={`mt-5 text-sm text-center ${
-              status === TransferStatus.Failed ? 'text-red-600' : 'text-gray-600'
-            }`}
-          >
-            {statusDescription}
+        <div className="mt-4 flex items-center justify-around">
+          <div className="ml-2 flex flex-col items-center">
+            <ChainLogo chainName={origin} size={72} background={true} />
+            <span className="mt-1 font-medium tracking-wider">
+              {getChainDisplayName(origin, true)}
+            </span>
           </div>
-          {showSignWarning && (
-            <div className="mt-3 text-sm text-center text-gray-600">
-              If your wallet does not show a transaction request, please try the transfer again.
-            </div>
-          )}
+          <div className="flex mb-6 sm:space-x-1.5">
+            {/* <WideChevron />
+          <WideChevron /> */}
+            {isFinal ? (
+              <div
+                className={`${
+                  isSent ? 'sent-final' : 'sent-failed'
+                } flex items-center justify-center`}
+              >
+                <Image
+                  src={isSent ? SuccessIcon : getIconByTransferStatus(status)}
+                  height={20}
+                  alt=""
+                />{' '}
+                <span className="sent-result">{isSent ? 'Sent' : 'Failed'}</span>
+              </div>
+            ) : (
+              <Image src={WideChevronIcon} height={32} alt="" />
+            )}
+          </div>
+          <div className="mr-2 flex flex-col items-center">
+            <ChainLogo chainName={destination} size={72} background={true} />
+            <span className="mt-1 font-medium tracking-wider">
+              {getChainDisplayName(destination, true)}
+            </span>
+          </div>
         </div>
-      )}
+
+        {isFinal ? (
+          <div className="mt-5 flex flex-col space-y-4">
+            <TransferProperty name="Sender Address" value={sender} url={fromUrl} />
+            <TransferProperty name="Recipient Address" value={recipient} url={toUrl} />
+            {token?.addressOrDenom && (
+              <TransferProperty name="Token Address or Denom" value={token.addressOrDenom} />
+            )}
+            {originTxHash && (
+              <TransferProperty
+                name="Origin Transaction Hash"
+                value={originTxHash}
+                url={originTxUrl}
+              />
+            )}
+            {msgId && <TransferProperty name="Message ID" value={msgId} />}
+            {explorerLink && (
+              <div className="flex justify-between">
+                <span className="text-gray-350 text-xs leading-normal tracking-wider">
+                  <a
+                    className="text-gray-350 text-xs leading-normal tracking-wider underline underline-offset-2 hover:opacity-80 active:opacity-70"
+                    href={explorerLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View message in Hyperlane Explorer
+                  </a>
+                </span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="py-4 flex flex-col justify-center items-center">
+            <Spinner />
+            <div
+              className={`mt-5 text-sm text-center ${
+                status === TransferStatus.Failed ? 'text-red-600' : 'text-gray-600'
+              }`}
+            >
+              {statusDescription}
+            </div>
+            {showSignWarning && (
+              <div className="mt-3 text-sm text-center text-gray-600">
+                If your wallet does not show a transaction request, please try the transfer again.
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </Modal>
   );
 }
@@ -243,19 +268,21 @@ export function Timeline({
 
 function TransferProperty({ name, value, url }: { name: string; value: string; url?: string }) {
   return (
-    <div>
-      <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center transfer-property">
+      <div style={{ maxWidth: '95%' }}>
         <label className="text-gray-350 text-sm leading-normal tracking-wider">{name}</label>
-        <div className="flex items-center space-x-2">
-          {url && (
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              <Image src={LinkIcon} width={14} height={14} alt="" />
-            </a>
-          )}
-          <CopyButton copyValue={value} width={14} height={14} />
+        <div className="mt-1 text-sm leading-normal tracking-wider truncate hash-address">
+          {'0xa63219d66004a2389f0c7f1d32ff9cb9487fc85f8a9d2e2547c3ac0793e6c3bc'}
         </div>
       </div>
-      <div className="mt-1 text-sm leading-normal tracking-wider truncate">{value}</div>
+      <div className="flex items-center space-x-4 flex-shrink-1">
+        {url && (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <Image src={LinkIcon} width={14} height={14} alt="" />
+          </a>
+        )}
+        <CopyButton copyValue={value} width={14} height={14} />
+      </div>
     </div>
   );
 }
