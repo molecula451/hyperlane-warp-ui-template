@@ -269,10 +269,10 @@ export function Timeline({
 function TransferProperty({ name, value, url }: { name: string; value: string; url?: string }) {
   return (
     <div className="flex justify-between items-center transfer-property">
-      <div style={{ maxWidth: '95%' }}>
+      <div style={{ maxWidth: '85%' }}>
         <label className="text-gray-350 text-sm leading-normal tracking-wider">{name}</label>
         <div className="mt-1 text-sm leading-normal tracking-wider truncate hash-address">
-          {'0xa63219d66004a2389f0c7f1d32ff9cb9487fc85f8a9d2e2547c3ac0793e6c3bc'}
+          {value}
         </div>
       </div>
       <div className="flex items-center space-x-4 flex-shrink-1">

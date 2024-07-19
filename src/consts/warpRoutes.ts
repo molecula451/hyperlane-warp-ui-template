@@ -13,6 +13,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       name: 'OORT',
       addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
       collateralAddressOrDenom: '0x5651fA7a726B9Ec0cAd00Ee140179912B6E73599',
+      logoURI: 'https://console.oortech.com/favicon.ico',
       connections: [
         {
           token: 'ethereum|oort|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
@@ -26,6 +27,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       symbol: 'OORT',
       name: 'OORT',
       addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
+      logoURI: 'https://console.oortech.com/favicon.ico',
       connections: [
         {
           token: 'ethereum|bsc|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',

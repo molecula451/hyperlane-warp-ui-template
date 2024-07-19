@@ -12,12 +12,9 @@ export function TipCard() {
         <h2 className="text-black sm:text-lg" style={styles.token}>
           Bridge Tokens
         </h2>
-        <a href="" className="ml-1.5" style={styles.learn}>
-          Learn More
-        </a>
       </div>
       <div className="flex items-end justify-between">
-        <p className="mt-1 text-xs sm:text-sm max-w-[70%]">
+        <p className="mt-1 text-xs sm:text-sm max-w-[100%]">
           You can now Bridge your OORT tokens to BSC and back seamlessly.
         </p>
       </div>

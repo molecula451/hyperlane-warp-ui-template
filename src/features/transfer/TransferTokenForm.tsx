@@ -90,12 +90,7 @@ function ChainSelectSection2({ isReview }: { isReview: boolean }) {
   const chains = useMemo(() => getWarpCore().getTokenChains(), []);
   const { values } = useFormikContext<TransferFormValues>();
   const { balance } = useOriginBalance(values);
-
-  const { values: values2 } = useFormikContext<TransferFormValues>();
-  const { balance: balance2 } = useDestinationBalance(values2);
-
-  useRecipientBalanceWatcher(values.recipient, balance);
-  useRecipientBalanceWatcher(values2.recipient, balance2);
+  const { balance: balance2 } = useDestinationBalance(values);
 
   return (
     <div>
