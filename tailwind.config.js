@@ -5,11 +5,6 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    fontFamily: {
-      sans: ['Helvetica', 'sans-serif'],
-      serif: ['Garamond', 'serif'],
-      mono: ['Courier New', 'monospace'],
-    },
     screens: {
       xs: '480px',
       ...defaultTheme.screens,
