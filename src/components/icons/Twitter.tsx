@@ -3,7 +3,6 @@ import { memo } from 'react';
 function _Twitter({
   width,
   height,
-  fill,
   className = '',
 }: {
   width?: number | string;
