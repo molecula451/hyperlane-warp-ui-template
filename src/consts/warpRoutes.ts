@@ -4,6 +4,36 @@ import { WarpCoreConfig } from '@hyperlane-xyz/sdk';
 // These configs will be merged with the warp routes in the configured registry
 // The input here is typically the output of the Hyperlane CLI warp deploy command
 export const warpRouteConfigs: WarpCoreConfig = {
-  tokens: [],
-  options: {},
+  tokens: [
+    {
+      chainName: 'bsc',
+      standard: 'EvmHypCollateral',
+      decimals: 18,
+      symbol: 'OORT',
+      name: 'OORT',
+      addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
+      collateralAddressOrDenom: '0x5651fA7a726B9Ec0cAd00Ee140179912B6E73599',
+      connections: [
+        {
+          token: 'ethereum|oort|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B'
+        }
+      ]
+    },
+    {
+      chainName: 'oort',
+      standard: 'EvmHypNative',
+      decimals: 18,
+      symbol: 'OORT',
+      name: 'OORT',
+      addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
+      connections: [
+        {
+          token: 'ethereum|bsc|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B'
+        }
+      ]
+    }
+  ],
+  options: {
+    // Define your options here if needed
+  }
 };

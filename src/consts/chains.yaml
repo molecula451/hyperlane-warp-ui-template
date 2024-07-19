@@ -18,3 +18,18 @@
 #   protocol: ethereum
 #   rpcUrls:
 #     - http: http://127.0.0.1:8555
+
+oort:
+  # yaml-language-server: $schema=../schema.json
+  name: oort
+  displayName: Oort
+  chainId: 970
+  domainId: 970
+  protocol: ethereum
+  isTestnet: false
+  rpcUrls:
+    - http: https://mainnet-rpc.oortech.com
+  nativeToken:
+    symbol: OORT
+    name: OORT
+    decimals: 18
