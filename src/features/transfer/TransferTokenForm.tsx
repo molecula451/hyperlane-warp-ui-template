@@ -1,17 +1,15 @@
-import BigNumber from 'bignumber.js';
 import { Form, Formik, useFormikContext } from 'formik';
 import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { TokenAmount } from '@hyperlane-xyz/sdk';
-import { ProtocolType, errorToString, isNullish, toWei } from '@hyperlane-xyz/utils';
+import { ProtocolType, errorToString, toWei } from '@hyperlane-xyz/utils';
 
 import { SmallSpinner } from '../../components/animation/SmallSpinner';
 import { ConnectAwareSubmitButton } from '../../components/buttons/ConnectAwareSubmitButton';
 import { IconButton } from '../../components/buttons/IconButton';
 import { SolidButton } from '../../components/buttons/SolidButton';
 import { ChevronIcon } from '../../components/icons/Chevron';
-import { WideChevron } from '../../components/icons/WideChevron';
 import { TextField } from '../../components/input/TextField';
 import { getIndexForToken, getTokenByIndex, getTokens, getWarpCore } from '../../context/context';
 import SwapIcon from '../../images/icons/swap.svg';
@@ -21,7 +19,6 @@ import { ChainSelectField } from '../chains/ChainSelectField';
 import { getChainDisplayName } from '../chains/utils';
 import { useIsAccountSanctioned } from '../sanctions/hooks/useIsAccountSanctioned';
 import { useStore } from '../store';
-import { SelectOrInputTokenIds } from '../tokens/SelectOrInputTokenIds';
 import { TokenSelectField } from '../tokens/TokenSelectField';
 import { useIsApproveRequired } from '../tokens/approval';
 import { useDestinationBalance, useOriginBalance } from '../tokens/balances';
@@ -32,7 +29,6 @@ import {
 } from '../wallet/hooks/multiProtocol';
 import { AccountInfo } from '../wallet/hooks/types';
 
-import { useFetchMaxAmount } from './maxAmount';
 import { TransferFormValues } from './types';
 import { useRecipientBalanceWatcher } from './useBalanceWatcher';
 import { useFeeQuotes } from './useFeeQuotes';
@@ -45,7 +41,7 @@ export function TransferTokenForm() {
   // Flag for if form is in input vs review mode
   const [isReview, setIsReview] = useState(false);
   // Flag for check current type of token
-  const [isNft, setIsNft] = useState(false);
+  const [_, setIsNft] = useState(false);
 
   const validate = (values: TransferFormValues) => validateForm(values, accounts);
 
@@ -164,24 +160,24 @@ function SwapChainsButton({ disabled }: { disabled?: boolean }) {
   );
 }
 
-function ChainSelectSection({ isReview }: { isReview: boolean }) {
-  const chains = useMemo(() => getWarpCore().getTokenChains(), []);
+// function ChainSelectSection({ isReview }: { isReview: boolean }) {
+//   const chains = useMemo(() => getWarpCore().getTokenChains(), []);
 
-  return (
-    <div className="flex items-center justify-center space-x-7 sm:space-x-10">
-      <ChainSelectField name="origin" label="From" chains={chains} disabled={isReview} />
-      <div className="flex flex-col items-center">
-        <div className="flex mb-6 sm:space-x-1.5">
-          <WideChevron classes="hidden sm:block" />
-          <WideChevron />
-          <WideChevron />
-        </div>
-        <SwapChainsButton disabled={isReview} />
-      </div>
-      <ChainSelectField name="destination" label="To" chains={chains} disabled={isReview} />
-    </div>
-  );
-}
+//   return (
+//     <div className="flex items-center justify-center space-x-7 sm:space-x-10">
+//       <ChainSelectField name="origin" label="From" chains={chains} disabled={isReview} />
+//       <div className="flex flex-col items-center">
+//         <div className="flex mb-6 sm:space-x-1.5">
+//           <WideChevron classes="hidden sm:block" />
+//           <WideChevron />
+//           <WideChevron />
+//         </div>
+//         <SwapChainsButton disabled={isReview} />
+//       </div>
+//       <ChainSelectField name="destination" label="To" chains={chains} disabled={isReview} />
+//     </div>
+//   );
+// }
 
 function TokenSection({
   setIsNft,
@@ -200,36 +196,36 @@ function TokenSection({
   );
 }
 
-function AmountSection({ isNft, isReview }: { isNft: boolean; isReview: boolean }) {
-  const { values } = useFormikContext<TransferFormValues>();
-  const { balance } = useOriginBalance(values);
+// function AmountSection({ isNft, isReview }: { isNft: boolean; isReview: boolean }) {
+//   const { values } = useFormikContext<TransferFormValues>();
+//   const { balance } = useOriginBalance(values);
 
-  return (
-    <div className="flex-1">
-      <div className="flex justify-between pr-1">
-        <label htmlFor="amount" className="block uppercase text-sm text-gray-500 pl-0.5">
-          Amount
-        </label>
-        <TokenBalance label="My balance" balance={balance} />
-      </div>
-      {isNft ? (
-        <SelectOrInputTokenIds disabled={isReview} />
-      ) : (
-        <div className="relative w-full">
-          <TextField
-            name="amount"
-            placeholder="0.00"
-            classes="w-full"
-            type="number"
-            step="any"
-            disabled={isReview}
-          />
-          <MaxButton disabled={isReview} balance={balance} />
-        </div>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div className="flex-1">
+//       <div className="flex justify-between pr-1">
+//         <label htmlFor="amount" className="block uppercase text-sm text-gray-500 pl-0.5">
+//           Amount
+//         </label>
+//         <TokenBalance label="My balance" balance={balance} />
+//       </div>
+//       {isNft ? (
+//         <SelectOrInputTokenIds disabled={isReview} />
+//       ) : (
+//         <div className="relative w-full">
+//           <TextField
+//             name="amount"
+//             placeholder="0.00"
+//             classes="w-full"
+//             type="number"
+//             step="any"
+//             disabled={isReview}
+//           />
+//           <MaxButton disabled={isReview} balance={balance} />
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
 
 function RecipientSection({ isReview }: { isReview: boolean }) {
   const { values } = useFormikContext<TransferFormValues>();
@@ -326,39 +322,39 @@ function ButtonSection({
   );
 }
 
-function MaxButton({ balance, disabled }: { balance?: TokenAmount; disabled?: boolean }) {
-  const { values, setFieldValue } = useFormikContext<TransferFormValues>();
-  const { origin, destination, tokenIndex } = values;
-  const { accounts } = useAccounts();
-  const { fetchMaxAmount, isLoading } = useFetchMaxAmount();
+// function MaxButton({ balance, disabled }: { balance?: TokenAmount; disabled?: boolean }) {
+//   const { values, setFieldValue } = useFormikContext<TransferFormValues>();
+//   const { origin, destination, tokenIndex } = values;
+//   const { accounts } = useAccounts();
+//   const { fetchMaxAmount, isLoading } = useFetchMaxAmount();
 
-  const onClick = async () => {
-    if (!balance || isNullish(tokenIndex) || disabled) return;
-    const maxAmount = await fetchMaxAmount({ balance, origin, destination, accounts });
-    if (isNullish(maxAmount)) return;
-    const decimalsAmount = maxAmount.getDecimalFormattedAmount();
-    const roundedAmount = new BigNumber(decimalsAmount).toFixed(4, BigNumber.ROUND_FLOOR);
-    setFieldValue('amount', roundedAmount);
-  };
+//   const onClick = async () => {
+//     if (!balance || isNullish(tokenIndex) || disabled) return;
+//     const maxAmount = await fetchMaxAmount({ balance, origin, destination, accounts });
+//     if (isNullish(maxAmount)) return;
+//     const decimalsAmount = maxAmount.getDecimalFormattedAmount();
+//     const roundedAmount = new BigNumber(decimalsAmount).toFixed(4, BigNumber.ROUND_FLOOR);
+//     setFieldValue('amount', roundedAmount);
+//   };
 
-  return (
-    <SolidButton
-      type="button"
-      onClick={onClick}
-      color="gray"
-      disabled={disabled}
-      classes="text-xs absolute right-0.5 top-2 bottom-0.5 px-2"
-    >
-      {isLoading ? (
-        <div className="flex items-center">
-          <SmallSpinner />
-        </div>
-      ) : (
-        'MAX'
-      )}
-    </SolidButton>
-  );
-}
+//   return (
+//     <SolidButton
+//       type="button"
+//       onClick={onClick}
+//       color="gray"
+//       disabled={disabled}
+//       classes="text-xs absolute right-0.5 top-2 bottom-0.5 px-2"
+//     >
+//       {isLoading ? (
+//         <div className="flex items-center">
+//           <SmallSpinner />
+//         </div>
+//       ) : (
+//         'MAX'
+//       )}
+//     </SolidButton>
+//   );
+// }
 
 function SelfButton({ disabled }: { disabled?: boolean }) {
   const { values, setFieldValue } = useFormikContext<TransferFormValues>();
