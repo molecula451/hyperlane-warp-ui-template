@@ -123,11 +123,17 @@ export function useEvmTransactionFns(): ChainTransactionFns {
         chainId,
         ...wagmiTx,
       });
-      const confirm = (): Promise<TypedTransactionReceipt> =>
-        waitForTransaction({ chainId, hash, confirmations: 1 }).then((r) => ({
+      const confirm = async (): Promise<TypedTransactionReceipt> => {
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(true);
+          }, 10000);
+        });
+        return waitForTransaction({ chainId, hash, confirmations: 1 }).then((r) => ({
           type: ProviderType.Viem,
           receipt: r,
         }));
+      };
       return { hash, confirm };
     },
     [onSwitchNetwork],
