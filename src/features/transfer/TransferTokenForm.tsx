@@ -69,6 +69,7 @@ export function TransferTokenForm() {
             <TokenSection setIsNft={setIsNft} isReview={isReview} />
             <AmountSection isNft={isNft} isReview={isReview} />
           </div> */}
+          <TokenSection setIsNft={setIsNft} isReview={isReview} />
           <RecipientSection isReview={isReview} />
           <ReviewDetails visible={isReview} />
           <ButtonSection
@@ -96,6 +97,9 @@ function ChainSelectSection2({ isReview }: { isReview: boolean }) {
 
   const { values: values2 } = useFormikContext<TransferFormValues>();
   const { balance: balance2 } = useDestinationBalance(values2);
+
+  useRecipientBalanceWatcher(values.recipient, balance);
+  useRecipientBalanceWatcher(values2.recipient, balance2);
 
   return (
     <div>
@@ -187,7 +191,7 @@ function TokenSection({
   isReview: boolean;
 }) {
   return (
-    <div className="flex-1">
+    <div className="flex-1" style={{ display: 'none' }}>
       <label htmlFor="tokenIndex" className="block uppercase text-sm text-gray-500 pl-0.5">
         Token
       </label>
