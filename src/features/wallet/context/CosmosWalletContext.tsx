@@ -11,12 +11,7 @@ import { APP_DESCRIPTION, APP_NAME, APP_URL } from '../../../consts/app';
 import { config } from '../../../consts/config';
 import { getCosmosKitConfig } from '../../chains/metadata';
 
-const theme = extendTheme({
-  fonts: {
-    heading: `'Neue Haas Grotesk', 'Helvetica', 'sans-serif'`,
-    body: `'Neue Haas Grotesk', 'Helvetica', 'sans-serif'`,
-  },
-});
+const theme = extendTheme();
 
 export function CosmosWalletContext({ children }: PropsWithChildren<unknown>) {
   const { chains, assets } = getCosmosKitConfig();

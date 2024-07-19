@@ -27,7 +27,7 @@ oort:
   domainId: 970
   protocol: ethereum
   isTestnet: false
-  logoURI: https://console.oortech.com/favicon.ico
+  logoURI: /logo.png
   rpcUrls:
     - http: https://mainnet-rpc.oortech.com
   nativeToken:
