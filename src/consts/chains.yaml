@@ -22,11 +22,12 @@
 oort:
   # yaml-language-server: $schema=../schema.json
   name: oort
-  displayName: Oort
+  displayName: OORT
   chainId: 970
   domainId: 970
   protocol: ethereum
   isTestnet: false
+  logoURI: https://console.oortech.com/favicon.ico
   rpcUrls:
     - http: https://mainnet-rpc.oortech.com
   nativeToken:

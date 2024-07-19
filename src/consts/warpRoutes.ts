@@ -6,6 +6,20 @@ import { TokenStandard, WarpCoreConfig } from '@hyperlane-xyz/sdk';
 export const warpRouteConfigs: WarpCoreConfig = {
   tokens: [
     {
+      chainName: 'oort',
+      standard: TokenStandard.EvmHypNative,
+      decimals: 18,
+      symbol: 'OORT',
+      name: 'OORT',
+      addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
+      logoURI: 'https://console.oortech.com/favicon.ico',
+      connections: [
+        {
+          token: 'ethereum|bsc|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
+        },
+      ],
+    },
+    {
       chainName: 'bsc',
       standard: TokenStandard.EvmHypCollateral,
       decimals: 18,
@@ -13,22 +27,10 @@ export const warpRouteConfigs: WarpCoreConfig = {
       name: 'OORT',
       addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
       collateralAddressOrDenom: '0x5651fA7a726B9Ec0cAd00Ee140179912B6E73599',
+      logoURI: 'https://console.oortech.com/favicon.ico',
       connections: [
         {
           token: 'ethereum|oort|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
-        },
-      ],
-    },
-    {
-      chainName: 'oort',
-      standard: TokenStandard.EvmHypNative,
-      decimals: 18,
-      symbol: 'OORT',
-      name: 'OORT',
-      addressOrDenom: '0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
-      connections: [
-        {
-          token: 'ethereum|bsc|0x15366f1a7c71baa6fd1c8FAB56b30faf98d56a3B',
         },
       ],
     },
