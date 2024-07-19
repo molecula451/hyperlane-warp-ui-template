@@ -124,7 +124,7 @@ export function useEvmTransactionFns(): ChainTransactionFns {
         ...wagmiTx,
       });
       const confirm = async (): Promise<TypedTransactionReceipt> => {
-        await new Promise(async (resolve) => {
+        await new Promise((resolve) => {
           setTimeout(() => {
             resolve(true);
           }, 10000);
