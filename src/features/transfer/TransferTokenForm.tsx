@@ -92,6 +92,12 @@ function ChainSelectSection2({ isReview }: { isReview: boolean }) {
   const { balance } = useOriginBalance(values);
   const { balance: balance2 } = useDestinationBalance(values);
 
+  const handleChangeInput = (e) => {
+    if (e.key == '-' || e.key == '+') {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center form-input-container">
@@ -100,8 +106,11 @@ function ChainSelectSection2({ isReview }: { isReview: boolean }) {
           placeholder="0.00"
           classes="w-full clearn-input"
           type="number"
+          min={0}
           step="any"
           disabled={isReview}
+          autoComplete="off"
+          onKeyDown={handleChangeInput}
         />
         <div className="flex flex-col flex-end">
           <ChainSelectField name="origin" label="From" chains={chains} disabled={isReview} />
@@ -118,7 +127,9 @@ function ChainSelectSection2({ isReview }: { isReview: boolean }) {
           classes="w-full clearn-input"
           type="number"
           step="any"
+          min={0}
           disabled={isReview}
+          onKeyDown={handleChangeInput}
         />
         <div className="flex flex-col flex-end">
           <ChainSelectField name="destination" label="From" chains={chains} disabled={isReview} />

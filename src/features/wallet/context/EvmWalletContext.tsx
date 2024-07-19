@@ -26,6 +26,7 @@ import { tryGetChainMetadata } from '../../chains/utils';
 
 function initWagmi() {
   const { chains, publicClient } = configureChains(getWagmiChainConfig(), [publicProvider()]);
+  console.log(chains);
 
   const connectorConfig = {
     chains,
